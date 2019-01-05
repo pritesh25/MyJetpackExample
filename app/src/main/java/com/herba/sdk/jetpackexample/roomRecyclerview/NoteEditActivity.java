@@ -7,15 +7,19 @@ import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
 import com.herba.sdk.jetpackexample.R;
+import com.herba.sdk.jetpackexample.roomRecyclerview.utils.Note;
+import com.herba.sdk.jetpackexample.roomRecyclerview.utils.NoteViewModel;
 
 public class NoteEditActivity extends AppCompatActivity {
 
     public static final String NOTE_ID = "note_id";
     public static final String UPDATED_NOTE = "updated_note";
+    private final String TAG = this.getClass().getSimpleName();
     private EditText edittext;
     private String noteId;
     private NoteViewModel noteViewModel;
@@ -28,20 +32,24 @@ public class NoteEditActivity extends AppCompatActivity {
 
         edittext = findViewById(R.id.edittext);
 
-        Intent intent = getIntent();
-        noteId = intent.getStringExtra("note_id");
+        Bundle bundle = getIntent().getExtras();
 
-        noteViewModel = ViewModelProviders.of(this).get(NoteViewModel.class);
+        if (bundle != null) {
+            noteId = bundle.getString("db_note_id");
+            Log.d(TAG, "bundle is not null, noteId = " + noteId);
 
-        data = noteViewModel.getNotes(noteId);
-        data.observe(this, new Observer<Note>() {
-            @Override
-            public void onChanged(Note note) {
-                edittext.setText(note.getmNote());
-            }
-        });
+            noteViewModel = ViewModelProviders.of(this).get(NoteViewModel.class);
 
-
+            data = noteViewModel.getNotes(noteId);
+            data.observe(this, new Observer<Note>() {
+                @Override
+                public void onChanged(Note note) {
+                    edittext.setText(note.getmNote());
+                }
+            });
+        } else {
+            Log.d(TAG, "bundle is null");
+        }
     }
 
     //update the database
@@ -49,9 +57,9 @@ public class NoteEditActivity extends AppCompatActivity {
 
         String updateNoteText = edittext.getText().toString();
         Intent intent = new Intent();
-        intent.putExtra(NOTE_ID,noteId);
-        intent.putExtra(UPDATED_NOTE,updateNoteText);
-        setResult(RESULT_OK,intent);
+        intent.putExtra(NOTE_ID, noteId);
+        intent.putExtra(UPDATED_NOTE, updateNoteText);
+        setResult(RESULT_OK, intent);
         finish();
     }
 

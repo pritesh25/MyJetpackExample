@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.herba.sdk.jetpackexample.R;
+import com.herba.sdk.jetpackexample.roomRecyclerview.utils.Note;
+import com.herba.sdk.jetpackexample.roomRecyclerview.utils.NoteViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,14 +25,14 @@ import static com.herba.sdk.jetpackexample.roomRecyclerview.NoteAddActivity.MYDA
 import static com.herba.sdk.jetpackexample.roomRecyclerview.NoteEditActivity.NOTE_ID;
 import static com.herba.sdk.jetpackexample.roomRecyclerview.NoteEditActivity.UPDATED_NOTE;
 
-public class MainRoomActivity extends AppCompatActivity {
+public class MainRoomActivity extends AppCompatActivity implements NoteListAdapter.onDeleteClick {
 
     private final String TAG = this.getClass().getSimpleName();
     private Button btnAdd;
     private static int NEW_NOTE_ACTIVITY_RESULT_CODE = 1;
     public static int UPDATE_NOTE_ACTIVITY_RESULT_CODE = 2;
 
-    private NoteViewModel  noteViewModel;
+    private NoteViewModel noteViewModel;
 
     private RecyclerView recyclerview;
     private NoteListAdapter adapter;
@@ -46,7 +48,7 @@ public class MainRoomActivity extends AppCompatActivity {
         list = new ArrayList<>();
         recyclerview = findViewById(R.id.recyclerview);
         recyclerview.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new NoteListAdapter(this,list);
+        adapter = new NoteListAdapter(this,list,this);
         recyclerview.setAdapter(adapter);
 
         btnAdd = findViewById(R.id.btnAdd);
@@ -96,5 +98,11 @@ public class MainRoomActivity extends AppCompatActivity {
         {
             Log.d(TAG,"note not saved");
         }
+    }
+
+    @Override
+    public void OnDeleteClick(Note note) {
+        //delete operation
+        noteViewModel.delete(note);
     }
 }

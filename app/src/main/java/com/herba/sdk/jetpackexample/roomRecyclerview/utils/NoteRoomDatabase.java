@@ -1,4 +1,4 @@
-package com.herba.sdk.jetpackexample.roomRecyclerview;
+package com.herba.sdk.jetpackexample.roomRecyclerview.utils;
 
 
 import android.content.Context;

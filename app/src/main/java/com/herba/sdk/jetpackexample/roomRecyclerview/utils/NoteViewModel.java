@@ -1,4 +1,4 @@
-package com.herba.sdk.jetpackexample.roomRecyclerview;
+package com.herba.sdk.jetpackexample.roomRecyclerview.utils;
 
 import android.app.Application;
 import android.os.AsyncTask;
@@ -30,7 +30,7 @@ public class NoteViewModel extends AndroidViewModel {
         new InsertAsyncTask(noteDao).execute(note);
     }
 
-    LiveData<List<Note>> getAllNotes() {
+    public LiveData<List<Note>> getAllNotes() {
         return allNote;
     }
 
@@ -40,6 +40,10 @@ public class NoteViewModel extends AndroidViewModel {
 
     public void update(Note note) {
         new UpdateAsyncTask(noteDao).execute(note);
+    }
+
+    public void delete(Note note) {
+        new DeleteAsyncTask(noteDao).execute(note);
     }
 
     @Override
@@ -77,4 +81,20 @@ public class NoteViewModel extends AndroidViewModel {
             return null;
         }
     }
+
+    private class DeleteAsyncTask extends AsyncTask<Note, Void, Void> {
+
+        NoteDao noteDao;
+
+        public DeleteAsyncTask(NoteDao noteDao) {
+            this.noteDao = noteDao;
+        }
+
+        @Override
+        protected Void doInBackground(Note... notes) {
+            noteDao.delete(notes[0]);
+            return null;
+        }
+    }
+
 }
