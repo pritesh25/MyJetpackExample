@@ -19,13 +19,16 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import static com.herba.sdk.jetpackexample.roomRecyclerview.NewNoteActivity.MYDATA;
+import static com.herba.sdk.jetpackexample.roomRecyclerview.NoteAddActivity.MYDATA;
+import static com.herba.sdk.jetpackexample.roomRecyclerview.NoteEditActivity.NOTE_ID;
+import static com.herba.sdk.jetpackexample.roomRecyclerview.NoteEditActivity.UPDATED_NOTE;
 
 public class MainRoomActivity extends AppCompatActivity {
 
     private final String TAG = this.getClass().getSimpleName();
     private Button btnAdd;
     private static int NEW_NOTE_ACTIVITY_RESULT_CODE = 1;
+    public static int UPDATE_NOTE_ACTIVITY_RESULT_CODE = 2;
 
     private NoteViewModel  noteViewModel;
 
@@ -43,14 +46,14 @@ public class MainRoomActivity extends AppCompatActivity {
         list = new ArrayList<>();
         recyclerview = findViewById(R.id.recyclerview);
         recyclerview.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new NoteListAdapter(getApplicationContext(),list);
+        adapter = new NoteListAdapter(this,list);
         recyclerview.setAdapter(adapter);
 
         btnAdd = findViewById(R.id.btnAdd);
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivityForResult(new Intent(getApplicationContext(),NewNoteActivity.class),NEW_NOTE_ACTIVITY_RESULT_CODE);
+                startActivityForResult(new Intent(getApplicationContext(),NoteAddActivity.class),NEW_NOTE_ACTIVITY_RESULT_CODE);
             }
         });
 
@@ -83,10 +86,15 @@ public class MainRoomActivity extends AppCompatActivity {
                 Log.d(TAG,"exception = "+e.getMessage());
             }
         }
+        else if(requestCode == UPDATE_NOTE_ACTIVITY_RESULT_CODE && resultCode == RESULT_OK)
+        {
+            Note note = new Note(data.getStringExtra(NOTE_ID),data.getStringExtra(UPDATED_NOTE));
+            noteViewModel.update(note);
+            Log.d(TAG,"note updated");
+        }
         else
         {
             Log.d(TAG,"note not saved");
         }
-
     }
 }

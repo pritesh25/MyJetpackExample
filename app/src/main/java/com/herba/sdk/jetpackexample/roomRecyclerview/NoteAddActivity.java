@@ -12,7 +12,7 @@ import com.herba.sdk.jetpackexample.R;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class NewNoteActivity extends AppCompatActivity {
+public class NoteAddActivity extends AppCompatActivity {
 
     public static final String MYDATA = "data";
     private Button btnAddNote;

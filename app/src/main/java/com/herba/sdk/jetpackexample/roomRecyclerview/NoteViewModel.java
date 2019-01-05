@@ -30,10 +30,16 @@ public class NoteViewModel extends AndroidViewModel {
         new InsertAsyncTask(noteDao).execute(note);
     }
 
-    LiveData<List<Note>> getAllNotes()
-    {
-
+    LiveData<List<Note>> getAllNotes() {
         return allNote;
+    }
+
+    public LiveData<Note> getNotes(String noteId) {
+        return noteDao.getNotes(noteId);
+    }
+
+    public void update(Note note) {
+        new UpdateAsyncTask(noteDao).execute(note);
     }
 
     @Override
@@ -53,6 +59,21 @@ public class NoteViewModel extends AndroidViewModel {
         @Override
         protected Void doInBackground(Note... notes) {
             noteDao.insert(notes[0]);
+            return null;
+        }
+    }
+
+    private class UpdateAsyncTask extends AsyncTask<Note, Void, Void> {
+
+        NoteDao noteDao;
+
+        public UpdateAsyncTask(NoteDao noteDao) {
+            this.noteDao = noteDao;
+        }
+
+        @Override
+        protected Void doInBackground(Note... notes) {
+            noteDao.update(notes[0]);
             return null;
         }
     }
