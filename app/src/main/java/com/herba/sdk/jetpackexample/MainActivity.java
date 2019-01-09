@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.herba.sdk.jetpackexample.livedata.MainLiveDataActivity;
 import com.herba.sdk.jetpackexample.livedatawithviewmodel.MainLiveDataViewModelActivity;
+import com.herba.sdk.jetpackexample.navigation.MainNavigationActivity;
 import com.herba.sdk.jetpackexample.roomRecyclerview.MainRoomActivity;
 import com.herba.sdk.jetpackexample.viewmodel.MainViewModelActivity;
 
@@ -51,6 +52,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(),MainRoomActivity.class));
+            }
+        });
+
+        findViewById(R.id.btnNavigation).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), MainNavigationActivity.class));
             }
         });
 
