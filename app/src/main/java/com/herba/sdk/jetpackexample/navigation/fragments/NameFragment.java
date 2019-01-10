@@ -62,5 +62,4 @@ public class NameFragment extends Fragment {
         texview = view.findViewById(R.id.texview);
         texview.setText(name);
     }
-
 }
