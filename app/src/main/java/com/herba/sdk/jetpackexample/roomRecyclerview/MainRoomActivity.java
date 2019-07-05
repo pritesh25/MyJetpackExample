@@ -36,7 +36,6 @@ public class MainRoomActivity extends AppCompatActivity implements NoteListAdapt
 
     private RecyclerView recyclerview;
     private NoteListAdapter adapter;
-    private List<Note> list;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,10 +44,10 @@ public class MainRoomActivity extends AppCompatActivity implements NoteListAdapt
 
         Log.d(TAG,TAG+" launched");
 
-        list = new ArrayList<>();
+        List<Note> list = new ArrayList<>();
         recyclerview = findViewById(R.id.recyclerview);
         recyclerview.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new NoteListAdapter(this,list,this);
+        adapter = new NoteListAdapter(this, list,this);
         recyclerview.setAdapter(adapter);
 
         btnAdd = findViewById(R.id.btnAdd);
