@@ -8,10 +8,12 @@ import android.view.View;
 import com.herba.sdk.jetpackexample.livedata.MainLiveDataActivity;
 import com.herba.sdk.jetpackexample.livedatawithviewmodel.MainLiveDataViewModelActivity;
 import com.herba.sdk.jetpackexample.navigation.MainNavigationActivity;
+import com.herba.sdk.jetpackexample.recyclerview.RecyclerViewActivity;
 import com.herba.sdk.jetpackexample.roomRecyclerview.MainRoomActivity;
 import com.herba.sdk.jetpackexample.viewmodel.MainViewModelActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -59,6 +61,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), MainNavigationActivity.class));
+            }
+        });
+
+        findViewById(R.id.btnRecyclerView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), RecyclerViewActivity.class));
             }
         });
 
