@@ -25,8 +25,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler_view);
 
-
-        adapter = new RecyclerAdapter(getApplicationContext(), arrayList);
+        adapter = new RecyclerAdapter(getApplicationContext(), new ArrayList<Data>());
         RecyclerView rv = findViewById(R.id.rv);
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(adapter);
@@ -47,6 +46,5 @@ public class RecyclerViewActivity extends AppCompatActivity {
                 noteViewModel.setData(new Data("tempData"));
             }
         });
-
     }
 }
