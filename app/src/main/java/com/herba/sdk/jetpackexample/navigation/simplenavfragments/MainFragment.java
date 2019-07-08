@@ -1,4 +1,4 @@
-package com.herba.sdk.jetpackexample.navigation.fragments;
+package com.herba.sdk.jetpackexample.navigation.simplenavfragments;
 
 
 import android.os.Bundle;

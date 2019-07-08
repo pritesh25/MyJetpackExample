@@ -1,4 +1,4 @@
-package com.herba.sdk.jetpackexample.navigation.fragments;
+package com.herba.sdk.jetpackexample.navigation.simplenavfragments;
 
 
 import android.os.Bundle;
@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.herba.sdk.jetpackexample.R;
 
-import static com.herba.sdk.jetpackexample.navigation.fragments.AccountFragment.DATA;
+import static com.herba.sdk.jetpackexample.navigation.simplenavfragments.AccountFragment.DATA;
 
 
 /**
