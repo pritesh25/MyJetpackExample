@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.herba.sdk.jetpackexample.R;
 
-public class MainNavigationActivity extends AppCompatActivity {
+public class SimpleNavigationActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

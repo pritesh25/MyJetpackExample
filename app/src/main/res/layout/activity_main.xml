@@ -43,9 +43,17 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Navigation"
+        android:text="Simple Navigation"
         android:textAllCaps="false"
         android:id="@+id/btnNavigation"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bottom Navigation"
+        android:textAllCaps="false"
+        android:id="@+id/btnBottomNavigation"
         />
 
     <Button

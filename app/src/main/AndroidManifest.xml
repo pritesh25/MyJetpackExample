@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".recyclerview.RecyclerViewActivity"></activity>
+        <activity
+            android:name=".navigation.BottomNavigationActivity"
+            android:label="@string/title_activity_bottom_navigation"></activity>
+        <activity android:name=".recyclerview.RecyclerViewActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +26,7 @@
         <activity android:name=".roomRecyclerview.MainRoomActivity" />
         <activity android:name=".roomRecyclerview.NoteAddActivity" />
         <activity android:name=".roomRecyclerview.NoteEditActivity" />
-        <activity android:name=".navigation.MainNavigationActivity" />
+        <activity android:name=".navigation.SimpleNavigationActivity" />
     </application>
 
 </manifest>
