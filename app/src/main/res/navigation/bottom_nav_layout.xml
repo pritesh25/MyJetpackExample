@@ -5,22 +5,53 @@
     android:id="@+id/bottom_nav_layout"
     app:startDestination="@id/homeFragment">
 
+    <!--https://developer.android.com/guide/navigation/navigation-getting-started-->
+    <!--if you don't use app:popUpToInclusive, your back stack would contain two instances of destination Fragment-->
+
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.herba.sdk.jetpackexample.navigation.bottomnavfragment.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <!--app:popUpTo="@+id/dashboardFragment"-->
+        <!--app:popUpToInclusive="true"-->
+        <action
+            android:id="@+id/action_homeFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
+        <!--app:popUpTo="@+id/notificationFragment"-->
+        <action
+            android:id="@+id/action_homeFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/dashboardFragment"
         android:name="com.herba.sdk.jetpackexample.navigation.bottomnavfragment.DashboardFragment"
         android:label="fragment_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard">
+        <!--app:popUpTo="@+id/homeFragment"-->
+        <action
+            android:id="@+id/action_dashboardFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <!--app:popUpTo="@+id/notificationFragment"-->
+        <action
+            android:id="@+id/action_dashboardFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/notificationFragment"
         android:name="com.herba.sdk.jetpackexample.navigation.bottomnavfragment.NotificationFragment"
         android:label="fragment_notification"
-        tools:layout="@layout/fragment_notification" />
+        tools:layout="@layout/fragment_notification">
+        <!--app:popUpTo="@+id/dashboardFragment"-->
+        <action
+            android:id="@+id/action_notificationFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
+        <!--app:popUpTo="@+id/homeFragment"-->
+        <action
+            android:id="@+id/action_notificationFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 
 </navigation>
