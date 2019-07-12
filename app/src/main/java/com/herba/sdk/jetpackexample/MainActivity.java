@@ -11,6 +11,7 @@ import com.herba.sdk.jetpackexample.livedata.MainLiveDataActivity;
 import com.herba.sdk.jetpackexample.livedatawithviewmodel.MainLiveDataViewModelActivity;
 import com.herba.sdk.jetpackexample.navigation.BottomNavigationActivity;
 import com.herba.sdk.jetpackexample.navigation.SimpleNavigationActivity;
+import com.herba.sdk.jetpackexample.paging.MainPagingActivity;
 import com.herba.sdk.jetpackexample.recyclerview.RecyclerViewActivity;
 import com.herba.sdk.jetpackexample.roomRecyclerview.MainRoomActivity;
 import com.herba.sdk.jetpackexample.viewmodel.MainViewModelActivity;
@@ -75,6 +76,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), RecyclerViewActivity.class));
+            }
+        });
+
+        findViewById(R.id.btnPagination).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), MainPagingActivity.class));
             }
         });
 

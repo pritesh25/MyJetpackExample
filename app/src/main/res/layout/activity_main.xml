@@ -1,67 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:gravity="center"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <Button
+        android:id="@+id/btnViewModel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ViewModel"
-        android:textAllCaps="false"
-        android:id="@+id/btnViewModel"
-        />
+        android:textAllCaps="false" />
 
     <Button
+        android:id="@+id/btnLiveData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="LiveData"
-        android:textAllCaps="false"
-        android:id="@+id/btnLiveData"
-        />
+        android:textAllCaps="false" />
 
     <Button
+        android:id="@+id/btnLiveDataViewModel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="LiveData With ViewModel"
-        android:textAllCaps="false"
-        android:id="@+id/btnLiveDataViewModel"
-        />
+        android:textAllCaps="false" />
 
     <Button
+        android:id="@+id/btnRoom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Room"
-        android:textAllCaps="false"
-        android:id="@+id/btnRoom"
-        />
+        android:textAllCaps="false" />
 
 
     <Button
+        android:id="@+id/btnNavigation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Simple Navigation"
-        android:textAllCaps="false"
-        android:id="@+id/btnNavigation"
-        />
+        android:textAllCaps="false" />
 
     <Button
+        android:id="@+id/btnBottomNavigation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Bottom Navigation"
-        android:textAllCaps="false"
-        android:id="@+id/btnBottomNavigation"
-        />
+        android:textAllCaps="false" />
 
     <Button
+        android:id="@+id/btnRecyclerView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="RecyclerView"
-        android:textAllCaps="false"
-        android:id="@+id/btnRecyclerView"
-        />
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btnPagination"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Paging"
+        android:textAllCaps="false" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
