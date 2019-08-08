@@ -9,6 +9,8 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.Query;
 
 public class RetrofitClient {
@@ -52,6 +54,10 @@ public class RetrofitClient {
     }
 
     public interface Api {
+
+        @Headers({
+                "Content-Type: application/json; charset=utf-8"
+        })
         @GET("answers")
         Call<StackApiResponse> getAnswers(@Query("page") int q,
                                           @Query("pagesize") int pagesize,

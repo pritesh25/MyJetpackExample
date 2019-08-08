@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".paging.MainPagingActivity"></activity>
+        <activity android:name=".paging.MainPagingActivity" />
         <activity
             android:name=".navigation.BottomNavigationActivity"
             android:label="@string/title_activity_bottom_navigation" />
@@ -33,12 +33,11 @@
         <activity android:name=".roomRecyclerview.NoteEditActivity" />
         <activity android:name=".navigation.SimpleNavigationActivity" />
 
-        <receiver android:name=".paging.ItemBroadcastReceiver">
-            <intent-filter>
-                <action android:name="com.example.Broadcast" >
-                </action>
-            </intent-filter>
-        </receiver>
+        <receiver
+            android:name=".paging.MainPagingActivity$ItemBroadcastReceiver"
+            android:enabled="true"
+            android:exported="false" />
+
     </application>
 
 </manifest>
