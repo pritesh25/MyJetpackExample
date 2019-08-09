@@ -4,6 +4,7 @@
     package="com.herba.sdk.jetpackexample">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -13,6 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".camerax2.CameraXActivity2"></activity>
+        <activity android:name=".camerax.CameraXActivity" />
         <activity android:name=".paging.MainPagingActivity" />
         <activity
             android:name=".navigation.BottomNavigationActivity"
@@ -37,7 +40,6 @@
             android:name=".paging.MainPagingActivity$ItemBroadcastReceiver"
             android:enabled="true"
             android:exported="false" />
-
     </application>
 
 </manifest>

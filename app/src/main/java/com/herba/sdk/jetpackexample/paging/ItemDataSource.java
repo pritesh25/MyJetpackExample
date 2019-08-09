@@ -11,9 +11,6 @@ import androidx.paging.PageKeyedDataSource;
 import com.herba.sdk.jetpackexample.paging.model.Item;
 import com.herba.sdk.jetpackexample.paging.model.StackApiResponse;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -24,7 +21,7 @@ import static com.herba.sdk.jetpackexample.paging.MainPagingActivity.PROGRESS_VI
 public class ItemDataSource extends PageKeyedDataSource<Integer, Item> {
 
     //the size of a page that we want
-    static final int PAGE_SIZE = 101; //max size is 100
+    static final int PAGE_SIZE = 100; //max size is 100
 
     //we will start from the first page which is 1
     private static final int FIRST_PAGE = 1;
@@ -52,17 +49,22 @@ public class ItemDataSource extends PageKeyedDataSource<Integer, Item> {
     }
 
     private void errorMessage(Response<StackApiResponse> response) {
-        try {
+
+        Log.d(tag, "(errorMessage) response = " + response.body());
+
+        Toast.makeText(context, "Response is null", Toast.LENGTH_SHORT).show();
+
+        /*try {
             //{"error_id":400,"error_message":"pagesize","error_name":"bad_parameter"}
-            JSONObject object = new JSONObject(response.body().toString());
+            JSONObject object = new JSONObject(String.valueOf(response));
             object.getString("error_message");
             object.getString("error_name");
 
-            Toast.makeText(context, object.getString("error_message"), Toast.LENGTH_SHORT).show();
+            Toast.makeText(context,""+object.getString("error_message"), Toast.LENGTH_SHORT).show();
 
         } catch (JSONException e) {
             Log.d(tag, "(errorMessage) catch error = " + e.getMessage());
-        }
+        }*/
     }
 
     //this will be called once to load the initial data

@@ -7,6 +7,8 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.herba.sdk.jetpackexample.camerax.CameraXActivity;
+import com.herba.sdk.jetpackexample.camerax2.CameraXActivity2;
 import com.herba.sdk.jetpackexample.livedata.MainLiveDataActivity;
 import com.herba.sdk.jetpackexample.livedatawithviewmodel.MainLiveDataViewModelActivity;
 import com.herba.sdk.jetpackexample.navigation.BottomNavigationActivity;
@@ -83,6 +85,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), MainPagingActivity.class));
+            }
+        });
+
+        findViewById(R.id.btnCameraX).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), CameraXActivity.class));
+            }
+        });
+
+        findViewById(R.id.btnCameraX2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), CameraXActivity2.class));
             }
         });
 
