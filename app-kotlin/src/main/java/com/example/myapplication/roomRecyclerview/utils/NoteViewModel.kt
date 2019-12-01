@@ -17,7 +17,6 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
     private val noteDao = noteDB!!.noteDao()
     var allNotes = noteDao.allNotes
 
-
     fun insert(note: Note) {
         //InsertAsyncTask(noteDao).execute(note)
 
@@ -71,5 +70,4 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
             return null
         }
     }
-
 }

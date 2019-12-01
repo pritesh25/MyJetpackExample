@@ -40,7 +40,7 @@ class MainRoomActivity : AppCompatActivity(), NoteAdapterCallback {
 
         val list = ArrayList<Note>()
         recyclerview = findViewById(R.id.recyclerview)
-        recyclerview!!.setLayoutManager(LinearLayoutManager(this))
+        recyclerview!!.layoutManager = LinearLayoutManager(this)
         adapter = NoteListAdapter(this, list, this)
         recyclerview!!.setAdapter(adapter)
 
