@@ -35,7 +35,7 @@ class NoteListAdapter(private val context: Context,
 
         if (holder is MyViewHolder) {
             val holder1 = holder as MyViewHolder
-            holder1.textView.setText(list!![position].getmNote())
+            holder1.textView.setText(list!![position].getNote())
             holder1.textView2.setText(list!![position].id)
 
         }

@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 class NoteViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val TAG = this.javaClass.simpleName
+    private val mTag = this.javaClass.simpleName
 
     private val noteDB = NoteRoomDatabase.getDatabase(application)
     private val noteDao = noteDB!!.noteDao()
@@ -21,17 +21,24 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
         //InsertAsyncTask(noteDao).execute(note)
 
         GlobalScope.launch(Dispatchers.IO) {
-            Log.d(TAG, "addData called")
+            //Log.d(mTag, "addData called")
             try {
-                noteDao.insert(note)
+                //Log.d(TAG, "getNotes called = ${noteDao.getNotes(note.id).value!!.textNote}")
+
+                if (noteDao.getNoteCount(note.id) > 0) {
+                    Log.d(mTag, "${note.textNote} already exist")
+                } else {
+                    Log.d(mTag, "${note.textNote} inserted")
+                    noteDao.insert(note)
+                }
             } catch (e: Exception) {
-                Log.d(TAG, "catch error = ${e.message}")
+                Log.d(mTag, "catch error = ${e.message}")
             }
         }
     }
 
     fun getNotes(noteId: String): LiveData<Note> {
-        return noteDao.getNotes(noteId)
+        return noteDao.getNote(noteId)
     }
 
     fun update(note: Note) {
@@ -44,7 +51,7 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
 
     override fun onCleared() {
         super.onCleared()
-        Log.d(TAG, "onCleared")
+        Log.d(mTag, "onCleared")
     }
 
     private inner class InsertAsyncTask(internal var noteDao: NoteDao) : AsyncTask<Note, Void, Void>() {

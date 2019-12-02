@@ -37,7 +37,7 @@ class NoteEditActivity : AppCompatActivity() {
             noteViewModel = ViewModelProviders.of(this).get(NoteViewModel::class.java)
 
             data = noteViewModel!!.getNotes(noteId)
-            data!!.observe(this, Observer<Note> { note -> edittext!!.setText(note.getmNote()) })
+            data!!.observe(this, Observer<Note> { note -> edittext!!.setText(note.getNote()) })
         } else {
             Log.d(TAG, "bundle is null")
         }
@@ -45,7 +45,6 @@ class NoteEditActivity : AppCompatActivity() {
 
     //update the database
     fun update(view: View) {
-
         val updateNoteText = edittext!!.text.toString()
         val intent = Intent()
         intent.putExtra(NOTE_ID, noteId)

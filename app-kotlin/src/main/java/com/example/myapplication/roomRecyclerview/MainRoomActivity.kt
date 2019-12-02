@@ -29,8 +29,8 @@ class MainRoomActivity : AppCompatActivity(), NoteAdapterCallback {
     private var btnAdd: Button? = null
     private lateinit var noteViewModel: NoteViewModel
 
-    private var recyclerview: RecyclerView? = null
-    private var adapter: NoteListAdapter? = null
+    private lateinit var recyclerview: RecyclerView
+    private lateinit var adapter: NoteListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,20 +38,29 @@ class MainRoomActivity : AppCompatActivity(), NoteAdapterCallback {
 
         Log.d(mTag, "$mTag launched")
 
-        val list = ArrayList<Note>()
-        recyclerview = findViewById(R.id.recyclerview)
-        recyclerview!!.layoutManager = LinearLayoutManager(this)
-        adapter = NoteListAdapter(this, list, this)
-        recyclerview!!.setAdapter(adapter)
-
-        btnAdd = findViewById(R.id.btnAdd)
-        btnAdd!!.setOnClickListener { startActivityForResult(Intent(applicationContext, NoteAddActivity::class.java), NEW_NOTE_ACTIVITY_RESULT_CODE) }
-
-        noteViewModel = ViewModelProviders.of(this).get(NoteViewModel::class.java)
-        noteViewModel.allNotes.observe(this, Observer<List<Note>> { notes -> adapter!!.setNotes(notes) })
+        setupAdapter()
 
         LoadApplications().execute()
+
+        clickListener()
+
     }
+
+    private fun setupAdapter() {
+        recyclerview = findViewById(R.id.recyclerview)
+        recyclerview.layoutManager = LinearLayoutManager(this)
+        adapter = NoteListAdapter(this, ArrayList<Note>(), this)
+        recyclerview.adapter = adapter
+
+        noteViewModel = ViewModelProviders.of(this).get(NoteViewModel::class.java)
+        noteViewModel.allNotes.observe(this, Observer<List<Note>> { notes -> adapter.setNotes(notes) })
+    }
+
+    private fun clickListener() {
+        btnAdd = findViewById(R.id.btnAdd)
+        btnAdd!!.setOnClickListener { startActivityForResult(Intent(applicationContext, NoteAddActivity::class.java), NEW_NOTE_ACTIVITY_RESULT_CODE) }
+    }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -62,7 +71,7 @@ class MainRoomActivity : AppCompatActivity(), NoteAdapterCallback {
                 Log.d(mTag, "note_id      = $note_id")
                 Log.d(mTag, "note_data    = " + data!!.getStringExtra(MYDATA)!!)
                 val note = Note(note_id, data.getStringExtra(MYDATA))
-                noteViewModel!!.insert(note)
+                noteViewModel.insert(note)
                 Log.d(mTag, "note saved")
             } catch (e: Exception) {
                 Log.d(mTag, "exception = " + e.message)
@@ -70,7 +79,7 @@ class MainRoomActivity : AppCompatActivity(), NoteAdapterCallback {
 
         } else if (requestCode == UPDATE_NOTE_ACTIVITY_RESULT_CODE && resultCode == Activity.RESULT_OK) {
             val note = Note(data!!.getStringExtra(NOTE_ID), data.getStringExtra(UPDATED_NOTE))
-            noteViewModel!!.update(note)
+            noteViewModel.update(note)
             Log.d(mTag, "note updated")
         } else {
             Log.d(mTag, "note not saved")
@@ -78,7 +87,7 @@ class MainRoomActivity : AppCompatActivity(), NoteAdapterCallback {
     }
 
     override fun OnDeleteItemClick(note: Note) {
-        noteViewModel!!.delete(note)
+        noteViewModel.delete(note)
     }
 
     companion object {
@@ -115,16 +124,7 @@ class MainRoomActivity : AppCompatActivity(), NoteAdapterCallback {
             try {
                 if (null != packageManager.getLaunchIntentForPackage(info.packageName)) {
 
-                    /*Log.d(
-                        mTag,
-                        "app Name = ${info.loadLabel(cxt.packageManager)}\t" +
-                                "package name = ${info.packageName}\t" +
-                                "system app = ${isSystemApp(info)}"
-                    )*/
-
-                    /**
-                     * only add those which are not match with this package name
-                     */
+                    //only add those which are not match with this package name
                     if (!TextUtils.equals(info.packageName, packageName)) {
                         val d = Note(
                                 info.packageName,

@@ -5,12 +5,13 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "notes")
-class Note(@field:PrimaryKey
-           var id: String, @field:ColumnInfo(name = "note")
-           var mNote: String) {
+class Note(
+        @field:PrimaryKey
+        var id: String,
+        @field:ColumnInfo(name = "note")
+        var textNote: String) {
 
-    fun getmNote(): String {
-        return this.mNote
+    fun getNote(): String {
+        return this.textNote
     }
-
 }
