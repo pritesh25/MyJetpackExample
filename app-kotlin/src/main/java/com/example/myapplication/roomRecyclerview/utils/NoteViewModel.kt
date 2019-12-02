@@ -15,7 +15,7 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
 
     private val noteDB = NoteRoomDatabase.getDatabase(application)
     private val noteDao = noteDB!!.noteDao()
-    var allNotes = noteDao.allNotes
+    var allNotes = noteDao.allApps
 
     fun insert(note: Note) {
         //InsertAsyncTask(noteDao).execute(note)
@@ -25,10 +25,10 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
             try {
                 //Log.d(TAG, "getNotes called = ${noteDao.getNotes(note.id).value!!.textNote}")
 
-                if (noteDao.getNoteCount(note.id) > 0) {
-                    Log.d(mTag, "${note.textNote} already exist")
+                if (noteDao.getAppCount(note.appPackage) > 0) {
+                    Log.d(mTag, "${note.appLabel} already exist")
                 } else {
-                    Log.d(mTag, "${note.textNote} inserted")
+                    Log.d(mTag, "${note.appLabel} inserted")
                     noteDao.insert(note)
                 }
             } catch (e: Exception) {
@@ -38,7 +38,7 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun getNotes(noteId: String): LiveData<Note> {
-        return noteDao.getNote(noteId)
+        return noteDao.getApp(noteId)
     }
 
     fun update(note: Note) {

@@ -21,6 +21,10 @@ import com.example.myapplication.roomRecyclerview.NoteEditActivity.Companion.NOT
 import com.example.myapplication.roomRecyclerview.NoteEditActivity.Companion.UPDATED_NOTE
 import com.example.myapplication.roomRecyclerview.utils.Note
 import com.example.myapplication.roomRecyclerview.utils.NoteViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
 
 class MainRoomActivity : AppCompatActivity(), NoteAdapterCallback {
@@ -40,10 +44,26 @@ class MainRoomActivity : AppCompatActivity(), NoteAdapterCallback {
 
         setupAdapter()
 
-        LoadApplications().execute()
+        //LoadApplications().execute()
 
+        GlobalScope.launch(Dispatchers.Main) {
+            loadApps()
+        }
         clickListener()
 
+    }
+
+    private suspend fun loadApps() {
+
+        val result = withContext(Dispatchers.IO) {
+            Log.d(mTag, "withContext called")
+            val list = checkForLaunchIntent(packageManager.getInstalledApplications(PackageManager.GET_META_DATA))
+            list
+        }
+        Log.d(mTag, "finished coroutine")
+        for (i in 0 until result.size) {
+            noteViewModel.insert(result[i])
+        }
     }
 
     private fun setupAdapter() {
@@ -60,7 +80,6 @@ class MainRoomActivity : AppCompatActivity(), NoteAdapterCallback {
         btnAdd = findViewById(R.id.btnAdd)
         btnAdd!!.setOnClickListener { startActivityForResult(Intent(applicationContext, NoteAddActivity::class.java), NEW_NOTE_ACTIVITY_RESULT_CODE) }
     }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

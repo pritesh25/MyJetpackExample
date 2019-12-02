@@ -36,7 +36,7 @@ class NoteListAdapter(private val context: Context,
         if (holder is MyViewHolder) {
             val holder1 = holder as MyViewHolder
             holder1.textView.setText(list!![position].getNote())
-            holder1.textView2.setText(list!![position].id)
+            holder1.textView2.setText(list!![position].appPackage)
 
         }
     }
@@ -70,10 +70,10 @@ class NoteListAdapter(private val context: Context,
             }
 
             imgEdit.setOnClickListener {
-                Log.d(TAG, "id = " + list!![adapterPosition].id)
+                Log.d(TAG, "id = " + list!![adapterPosition].appPackage)
 
                 val intent = Intent(context, NoteEditActivity::class.java)
-                intent.putExtra("db_note_id", list!![adapterPosition].id)
+                intent.putExtra("db_note_id", list!![adapterPosition].appPackage)
                 (context as Activity).startActivityForResult(intent, UPDATE_NOTE_ACTIVITY_RESULT_CODE)
             }
         }

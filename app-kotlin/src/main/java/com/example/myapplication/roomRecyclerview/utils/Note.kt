@@ -7,11 +7,11 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "notes")
 class Note(
         @field:PrimaryKey
-        var id: String,
-        @field:ColumnInfo(name = "note")
-        var textNote: String) {
+        var appPackage: String,
+        //@field:ColumnInfo(name = "note")
+        var appLabel: String) {
 
     fun getNote(): String {
-        return this.textNote
+        return this.appLabel
     }
 }
